@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quiz KHTN - Chất và biến đổi của chất</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#e6f7ff;
+}
+
+.box{
+background:white;
+width:340px;
+margin:40px auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
+
+button{
+display:block;
+width:100%;
+margin:6px 0;
+padding:10px;
+font-size:16px;
+}
+
+#score{
+font-weight:bold;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Quiz KHTN 🔬</h2>
+
+<p id="question"></p>
+
+<div id="answers"></div>
+
+<p id="result"></p>
+<p id="score"></p>
+
+</div>
+
+<script>
+
+let questions = [
+
+{
+q:"Nước có công thức hóa học là gì?",
+a:["CO2","H2O","O2"],
+correct:1
+},
+
+{
+q:"Hiện tượng nào là biến đổi hóa học?",
+a:["Nước đá tan","Giấy cháy","Muối tan trong nước"],
+correct:1
+},
+
+{
+q:"Hiện tượng nào là biến đổi vật lí?",
+a:["Sắt bị gỉ","Đường tan trong nước","Đốt cháy gỗ"],
+correct:1
+},
+
+{
+q:"Chất nào là chất tinh khiết?",
+a:["Nước muối","Nước cất","Nước biển"],
+correct:1
+},
+
+{
+q:"Sắt bị gỉ là loại biến đổi nào?",
+a:["Biến đổi vật lí","Biến đổi hóa học","Không phải biến đổi"],
+correct:1
+}
+
+];
+
+let current=0;
+let score=0;
+
+function showQuestion(){
+
+let q=questions[current];
+
+document.getElementById("question").innerHTML=q.q;
+
+let answersHTML="";
+
+for(let i=0;i<q.a.length;i++){
+
+answersHTML+=`<button onclick="check(${i})">${q.a[i]}</button>`;
+
+}
+
+document.getElementById("answers").innerHTML=answersHTML;
+
+}
+
+function check(i){
+
+let q=questions[current];
+
+if(i==q.correct){
+document.getElementById("result").innerHTML="✅ Đúng!";
+score++;
+}else{
+document.getElementById("result").innerHTML="❌ Sai!";
+}
+
+current++;
+
+if(current<questions.length){
+setTimeout(()=>{
+document.getElementById("result").innerHTML="";
+showQuestion();
+},1000);
+}else{
+document.getElementById("question").innerHTML="Hoàn thành 🎉";
+document.getElementById("answers").innerHTML="";
+document.getElementById("score").innerHTML="Điểm của bạn: "+score+"/"+questions.length;
+}
+
+}
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
